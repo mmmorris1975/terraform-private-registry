@@ -1,0 +1,9 @@
+lambda*.zip
+*.pyc
+*.pyo
+
+.terraform
+terraform.tfstate*
+terraform.tfvars*
+
+.idea
