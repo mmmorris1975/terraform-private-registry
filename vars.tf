@@ -22,10 +22,9 @@ variable "_dynamodb" {
   type        = map(string)
   description = "Default dynamodb table attributes, unless overridden in the 'dynamodb' map"
   default = {
-    kms_key         = "alias/aws/dynamodb"
-    read_capacity   = 1
-    write_capacity  = 1
-    prevent_destroy = false
+    kms_key        = "alias/aws/dynamodb"
+    read_capacity  = 1
+    write_capacity = 1
   }
 }
 

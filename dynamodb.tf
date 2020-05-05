@@ -32,6 +32,6 @@ resource "aws_dynamodb_table" "db" {
   }
 
   lifecycle {
-    prevent_destroy = local.dynamodb["prevent_destroy"]
+    prevent_destroy = true
   }
 }
