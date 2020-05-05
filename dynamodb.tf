@@ -30,4 +30,8 @@ resource "aws_dynamodb_table" "db" {
     enabled     = true
     kms_key_arn = data.aws_kms_key.dynamodb.arn
   }
+
+  lifecycle {
+    prevent_destroy = local.dynamodb["prevent_destroy"]
+  }
 }

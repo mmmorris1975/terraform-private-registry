@@ -8,6 +8,7 @@ variable "auth_config" {
     token_endpoint : string
     ports : list(string)
   })
+
   default = null
 }
 
@@ -21,9 +22,10 @@ variable "_dynamodb" {
   type        = map(string)
   description = "Default dynamodb table attributes, unless overridden in the 'dynamodb' map"
   default = {
-    kms_key        = "alias/aws/dynamodb"
-    read_capacity  = 1
-    write_capacity = 1
+    kms_key         = "alias/aws/dynamodb"
+    read_capacity   = 1
+    write_capacity  = 1
+    prevent_destroy = false
   }
 }
 
