@@ -19,7 +19,6 @@ resource "aws_apigatewayv2_api" "api" {
 }
 
 resource "aws_apigatewayv2_stage" "default" {
-  #api_id      = aws_apigatewayv2_route.wkt.api_id
   api_id      = module.discovery.route["api_id"]
   name        = "$default"
   description = "Default API Stage, auto-deployed"

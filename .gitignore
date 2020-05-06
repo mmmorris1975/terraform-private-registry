@@ -2,7 +2,8 @@ lambda*.zip
 *.pyc
 *.pyo
 
-.terraform
+.terraform/
+.terraform.tfstate*
 terraform.tfstate*
 terraform.tfvars*
 

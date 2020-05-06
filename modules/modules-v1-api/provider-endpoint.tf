@@ -4,7 +4,7 @@ resource "aws_apigatewayv2_route" "get-provider" {
   target    = format("integrations/%s", aws_apigatewayv2_integration.provider.id)
 
   authorizer_id      = var.authorizer_id
-  authorization_type = var.authorizer_id != null ? "JWT" : null
+  authorization_type = local.authorization_type
 }
 
 resource "aws_apigatewayv2_route" "get-provider-versions" {
@@ -13,7 +13,7 @@ resource "aws_apigatewayv2_route" "get-provider-versions" {
   target    = format("integrations/%s", aws_apigatewayv2_integration.provider.id)
 
   authorizer_id      = var.authorizer_id
-  authorization_type = var.authorizer_id != null ? "JWT" : null
+  authorization_type = local.authorization_type
 }
 
 resource "aws_apigatewayv2_route" "get-provider-download" {
@@ -22,7 +22,7 @@ resource "aws_apigatewayv2_route" "get-provider-download" {
   target    = format("integrations/%s", aws_apigatewayv2_integration.provider.id)
 
   authorizer_id      = var.authorizer_id
-  authorization_type = var.authorizer_id != null ? "JWT" : null
+  authorization_type = local.authorization_type
 }
 
 resource "aws_apigatewayv2_integration" "provider" {

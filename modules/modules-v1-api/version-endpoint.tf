@@ -4,7 +4,7 @@ resource "aws_apigatewayv2_route" "get-version" {
   target    = format("integrations/%s", aws_apigatewayv2_integration.version.id)
 
   authorizer_id      = var.authorizer_id
-  authorization_type = var.authorizer_id != null ? "JWT" : null
+  authorization_type = local.authorization_type
 }
 
 resource "aws_apigatewayv2_route" "get-version-download" {
@@ -13,7 +13,7 @@ resource "aws_apigatewayv2_route" "get-version-download" {
   target    = format("integrations/%s", aws_apigatewayv2_integration.version.id)
 
   authorizer_id      = var.authorizer_id
-  authorization_type = var.authorizer_id != null ? "JWT" : null
+  authorization_type = local.authorization_type
 }
 
 resource "aws_apigatewayv2_integration" "version" {

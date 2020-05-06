@@ -16,9 +16,9 @@ module "discovery" {
 
   api    = local.api_properties
   lambda = local.lambda_properties
+  tags   = var.tags
 
   dynamodb_table_name = module.datastore.table["name"]
-  tags                = var.tags
 }
 
 module "modules_v1" {
@@ -26,8 +26,8 @@ module "modules_v1" {
 
   api    = merge(local.api_properties, map("base_path", local.api["modules_v1_path"]))
   lambda = local.lambda_properties
+  tags   = var.tags
 
   authorizer_id       = var.auth_config != null ? aws_apigatewayv2_authorizer.jwt[0].id : null
   dynamodb_table_name = module.datastore.table["name"]
-  tags                = var.tags
 }

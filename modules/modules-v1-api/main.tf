@@ -5,3 +5,7 @@ terraform {
     aws = "~> 2.58" # Add aws_apigatewayv2_route resource
   }
 }
+
+locals {
+  authorization_type = var.authorizer_id != null ? "JWT" : null
+}

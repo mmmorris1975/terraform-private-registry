@@ -14,13 +14,13 @@ variable "auth_config" {
 
 variable "api_config" {
   type        = map(string)
-  description = ""
+  description = "A map of configuration for the API resources"
   default     = {}
 }
 
 variable "_api_config" {
   type        = map(string)
-  description = ""
+  description = "Default API resource configuration, unless overridden by the 'api_config' variable"
   default = {
     name            = "terraform-registry"
     modules_v1_path = "/v1/modules"
