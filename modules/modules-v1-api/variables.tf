@@ -28,8 +28,9 @@ variable "authorizer_id" {
 }
 
 variable "tags" {
-  type    = map(string)
-  default = {}
+  type        = map(string)
+  description = "The map of tags to apply to taggable resources"
+  default     = {}
 }
 
 variable "provider_lambda_settings" {

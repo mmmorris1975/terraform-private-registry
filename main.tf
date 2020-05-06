@@ -7,8 +7,8 @@ terraform {
 }
 
 locals {
-  modules_v1_path = "/v1/modules"
   api             = merge(var._api_config, var.api_config)
+  modules_v1_path = "/v1/modules"
 }
 
 resource "aws_apigatewayv2_api" "api" {

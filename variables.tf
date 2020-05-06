@@ -28,6 +28,7 @@ variable "_api_config" {
 }
 
 variable "tags" {
-  type    = map(string)
-  default = {}
+  type        = map(string)
+  description = "The map of tags to apply to taggable resources"
+  default     = {}
 }

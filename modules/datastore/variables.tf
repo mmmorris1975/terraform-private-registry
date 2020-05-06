@@ -5,7 +5,7 @@ variable "table_name" {
 
 variable "tags" {
   type        = map(string)
-  description = "Tags to apply to the DynamoDB resources"
+  description = "The map of tags to apply to taggable resources"
   default     = {}
 }
 
