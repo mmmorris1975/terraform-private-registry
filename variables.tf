@@ -12,19 +12,18 @@ variable "auth_config" {
   default = null
 }
 
-variable "dynamodb" {
+variable "api_config" {
   type        = map(string)
-  description = "Map of dynamodb table attributes to override defaults"
+  description = ""
   default     = {}
 }
 
-variable "_dynamodb" {
+variable "_api_config" {
   type        = map(string)
-  description = "Default dynamodb table attributes, unless overridden in the 'dynamodb' map"
+  description = ""
   default = {
-    kms_key        = "alias/aws/dynamodb"
-    read_capacity  = 1
-    write_capacity = 1
+    name            = "terraform-registry"
+    modules_v1_path = "/v1/modules"
   }
 }
 

@@ -1,13 +1,11 @@
 data "aws_iam_policy_document" "r" {
   statement {
     principals {
-      identifiers = [
-      "lambda.amazonaws.com"]
-      type = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+      type        = "Service"
     }
 
-    actions = [
-    "sts:AssumeRole"]
+    actions = ["sts:AssumeRole"]
   }
 }
 
@@ -30,8 +28,7 @@ data "aws_iam_policy_document" "dynamodb" {
       "dynamodb:Scan"
     ]
 
-    resources = [
-    aws_dynamodb_table.db.arn]
+    resources = [module.datastore.table["arn"]]
   }
 }
 
