@@ -1,7 +1,7 @@
 # Module Registry API
 
 Build the AWS HTTP API gateway endpoints which implement a subset of the Terraform Registry
-(HTTP API)[https://www.terraform.io/docs/registry/api.html] which is required for the Terraform CLI to interact with
+[HTTP API](https://www.terraform.io/docs/registry/api.html) which is required for the Terraform CLI to interact with
 the private registry.
 
 The module supports configuring an Authorizer against the endpoints managed by this module so that the interaction with

@@ -1,7 +1,7 @@
 # Module Registry Discovery API
 
 Build the AWS HTTP API gateway endpoint for the required Terraform registry
-(service discovery)[https://www.terraform.io/docs/internals/remote-service-discovery.html]
+[service discovery](https://www.terraform.io/docs/internals/remote-service-discovery.html)
 
 ## Example
 ```hcl-terraform
