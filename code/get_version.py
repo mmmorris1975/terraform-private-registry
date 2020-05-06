@@ -28,6 +28,8 @@ def lambda_handler(event, context):
 
         u = url.urlunsplit(('https', dl_host, p, qs, None))
 
+        db.update_download_count(ns, name, provider, ver)
+
         return {
             'isBase64Encoded': False,
             'statusCode': 204,

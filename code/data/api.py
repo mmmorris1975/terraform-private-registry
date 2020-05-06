@@ -23,7 +23,7 @@ def get_module_versions(ns, name, provider, latest=False):
     else:
         res = t.query(
             KeyConditionExpression=Key('k').eq('%s/%s' % (ns, name)) & Key('s').begins_with('%s/' % provider),
-            ReturnConsumedCapacity="NONE"
+            ReturnConsumedCapacity='NONE'
         )
 
         for e in res.get('Items'):
@@ -45,7 +45,7 @@ def get_module_version(ns, name, provider, version):
             'k': '%s/%s' % (ns, name),
             's': '%s/%s' % (provider, version)
         },
-        ReturnConsumedCapacity="NONE"
+        ReturnConsumedCapacity='NONE'
     )
 
     if 'Item' in res:
@@ -57,6 +57,21 @@ def get_module_version(ns, name, provider, version):
             return _parse_item(ns, res['Item'])
     else:
         return {}
+
+
+def update_download_count(ns, name, provider, version):
+    t.update_item(
+        Key={
+            'k': '%s/%s' % (ns, name),
+            's': '%s/%s' % (provider, version)
+        },
+        ReturnValues='NONE',
+        ReturnConsumedCapacity="NONE",
+        UpdateExpression="ADD dl :n",
+        ExpressionAttributeValues={
+            ':n': 1
+        }
+    )
 
 
 def wkt_config():
@@ -80,7 +95,7 @@ def wkt_config():
             cfg['login.v1'] = i['login_v1']
             cfg['login.v1']['grant_types'] = list(cfg['login.v1']['grant_types'])
 
-            # DynamoDB and Python sets are unordered, so we have no idea if the data is in the proper order
+            # DynamoDB and Python sets are unordered, so we have no idea if the data is in the proper order, fix it
             ports = []
             for e in cfg['login.v1']['ports']:
                 ports.append(int(e))
@@ -106,28 +121,28 @@ def _parse_item(ns, i):
         "verified": i.get('vfy', False)
     }
 
-# TODO
-# implement methods to support: (eventually, don't think these are on the critical path for registry implementation)
-#   GET  <base_url>
-#   GET  <base_url>/search
-#   GET  <base_url>/:namespace
-#   GET  <base_url>/:namespace/:name
-#
-# publish new module version
-#   must be unique version for a given namespace, module name, and provider, otherwise fail
-#   update 'latest' version to point to this new version
-#   POST to /:namespace/:name/:provider/:version ?
-#     body contains owner, description, source repo url
-#     returns composed id value (or error message, if applicable)
-#
-# delete module
-#   must support deleting at least a specific version
-#   should support deleting all versions for a given module name and/or provider
-#   would need to handle case where version referenced in latest is deleted
-#
-# update attributes for a module version
-#   limited ability for allowed users to update attributes (owner, description, source repo url only?)
-#     PUT (PATCH?) to /:namespace/:name/:provider/:version ?
-#       body contains attributes for the update
-#   explicitly disallow updating any generated or key attributes
-#   find some way to update downloads count attribute, but only from the api (no ability for user updates)
+    # TODO
+    # implement methods to support: (eventually, don't think these are on the critical path for registry implementation)
+    #   GET  <base_url>
+    #   GET  <base_url>/search
+    #   GET  <base_url>/:namespace
+    #   GET  <base_url>/:namespace/:name
+    #
+    # publish new module version
+    #   must be unique version for a given namespace, module name, and provider, otherwise fail
+    #   update 'latest' version to point to this new version
+    #   POST to /:namespace/:name/:provider/:version ?
+    #     body contains owner, description, source repo url
+    #     returns composed id value (or error message, if applicable)
+    #
+    # delete module
+    #   must support deleting at least a specific version
+    #   should support deleting all versions for a given module name and/or provider
+    #   would need to handle case where version referenced in latest is deleted
+    #
+    # update attributes for a module version
+    #   limited ability for allowed users to update attributes (owner, description, source repo url only?)
+    #     PUT (PATCH?) to /:namespace/:name/:provider/:version ?
+    #       body contains attributes for the update
+    #   explicitly disallow updating any generated or key attributes
+    #   find some way to update downloads count attribute, but only from the api (no ability for user updates)

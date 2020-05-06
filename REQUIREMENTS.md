@@ -32,6 +32,7 @@ GETx paths seem to be the only required setup for terraform to pull a module fro
 UI nav and display of module info
 
 support proxying request to public registry if requests under /:namespace fail (not found) local lookup?
+ - why?  If you just remove that 'host' portion of the module source, you search the "official" registry by default
 
 
 High-level returned data elements (there are other module-specific things like input/output vars, submodules, etc for some methods):
